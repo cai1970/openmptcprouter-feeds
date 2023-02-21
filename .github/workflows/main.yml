@@ -1,5 +1,5 @@
 name: openmptcprouter
-on: [push]
+on: [push, workflow_dispatch]
 
 env:
   REPO_URL: 'https://github.com/ysurac/openmptcprouter'
@@ -8,8 +8,8 @@ jobs:
   build:
     strategy:
       matrix:
-        OMR_TARGET: [bpi-r1, bpi-r2, bpi-r64, rpi2, rpi4, wrt32x, espressobin, r2s, rpi3, wrt3200acm, x86, x86_64, ubnt-erx, r4s, r7800, rutx, r5s]
-        OMR_KERNEL: [5.4, 5.15, 6.1]
+        OMR_TARGET: [p2w_r619ac]
+        OMR_KERNEL: [5.4]
     runs-on: ubuntu-latest
     continue-on-error: true
 
@@ -17,7 +17,7 @@ jobs:
     - name: Branch name
       id: branch_name
       run: |
-        echo "SOURCE_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+        echo "SOURCE_NAME=v0.58" >> $GITHUB_OUTPUT
         echo "SOURCE_BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
         echo "SOURCE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
         echo "WORKSPACE=${GITHUB_WORKSPACE}" >> $GITHUB_OUTPUT
